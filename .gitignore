@@ -1,2 +1,7 @@
 OOP Absolute C.pdf
 .DS_Store
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+.idea
