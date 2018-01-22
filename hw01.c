@@ -67,6 +67,9 @@
 //       if the selected option implies a lower right corner that is outside the grid, print message
 //         and try again
 //       init a ship object
+//       for otherShip in ship vector for current player
+//         if ship.overlapsWish(otherShip)
+//           print an error message and try again
 //       push the object into the vector for the current player
 //    push the ship vector for the player into the multivector that stores data for the game
 //  return the ship multivector that stores boards for the whole game
