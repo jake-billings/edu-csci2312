@@ -1,0 +1,156 @@
+/**
+ * Name: Jake Billings
+ * Date: 01/21/2018
+ * Class: CSCI 2312
+ * Description:
+ *
+ * Read the following description of the Battleship game and do a ROC(k)ET decomposition.  For the Test
+ * phase, describe what testing you would need to do on each function to feel like the major threads of the function
+ * were tested properly.
+ *
+ * Instead of a char array, I store each board as a vector of ships. This has no effect on checking if a ship
+ *  exceeds the board size if height and width are stored as variables with scope higher than the the ship
+ *  class.
+ *
+ * However, checking for ship overlap involves checking for overlap between each ship element. A for loop is used
+ *  here, and a method on the ship class is used to check if two ships overlap.
+ *
+ * Status: psuedocode
+ */
+
+//---------Dependency Imports---------
+//Include cout
+//Include any classes we might need
+//Use the standard namespace so that we don't have to type "std" all the time
+
+//-----------Data Structures/Classes----------
+//SHIP_TYPE
+    // Declare an enumeration called SHIP_TYPE with the following values:
+    // Carrier (length=5)
+    // Battleship (length=4)
+    // Cruiser (length=3)
+    // Submarine (length=3)
+    // Destroyer (length=2)
+
+//SHIP_ORIENTATION
+    // Declare an enumeration called SHIP_TYPE with the following values:
+    // Horizontal
+    // Vertical
+
+//SHIP
+    // Declare a data structure called Ship with the following properties:
+    // int x - the x value of the leftmost corner of the ship
+    // int y - the y value of the uppermost corner of the ship
+    // SHIP_TYPE shipType - the type (and therefore length) of the ship
+    // SHIP_ORIENTATION - the orientation of the ship (which determines where its lower right corner is)
+    //
+    // help from: https://www.geeksforgeeks.org/find-two-rectangles-overlap/
+    // DECLARE ship.overlapsWith()
+        // Parameters: the other ship to check if this ship overlaps with
+        // Return value: boolean representing whether or not this ship overlaps with the other
+        //  a boolean function that checks if this instance of ship overlaps with another
+        /*If one rectangle is on left side of other
+          if (this.upperLeftX > other.lowerRightX || this.lowerRightX > other.upperLeftX ) return false
+         If one rectangle is above other
+          if (this.upperLeftY < other.lowerRightY || this.lowerRightY < other.upperLeftY ) return false
+         return true*/
+    // DECLARE ship.existsAt()
+        // Parameters: i, j representing x y coordinate to check against the ship's location
+        // Return value: boolean representing whether or not the ship exists at that point
+        /* bool existsAt(int i, int j)
+          a boolean function that checks if a ship exists at a grid space
+          if ship is HORIZONTAL
+            return true if y matches j and i >= x and i< x+length
+          else if ship is VERTICAL
+            return true if x matches i and j >= y and j< y+length*/
+
+//-----------Helper Function------------
+//DECLARE printGrid(ship[])
+    // Parameter: ship[], which is an array of ships representing a board
+    // Return value: void
+    // that exist in the "grid" we are printing
+    /* print blank (in upper left)
+     for i in [0, width)
+       print convert number to letter i+1 //label the columns
+             such that A=1 etc
+     for j in [0, height)
+       print j+1 // label the rows
+       for i in [0, width)
+         if ship.existsAt(i, j)
+           print letter for ship.shipType
+         else
+           print a blank space*/
+
+//-----------Main Function------------
+//DECLARE createGrid()
+    // Parameters: input stream (input stream is required since we're going to mock it for testing; it would be cin for a
+    //  real game)
+    // Return value: ship[2][5] - an array of ship arrays each ship[5] represents a fleet grid
+    //  *The return value might actually be vectors because .push_back() would be useful
+    //
+    /*
+      declare a vector of ship vectors to store all boards for the game
+      For each player [0,1]
+         declare a ship vector for current player
+         For each shipType in SHIP_TYPES (5 ship types)
+           if the player is a HUMAN
+             print board (the ship vector for current player)
+             print message that says we're placing a ship of type shipType
+             print a message that says we want the upper left hand corner
+             input := getline() from cin
+             if the input isn't in the form A1, print error message and accept input again
+             convert the input to (x, y) coordinates where x is the number that corresponds with the letter and y is the number-1
+               E.g. D2 -> x=3, y=1 (since we're zero indexed)
+             if the x, y is outside the grid, print message and try again
+             calculate the two possible lower right corners of the ship
+               This are at x+length, y (horizontal) and x, y+length (vertical)
+             ask the user which option they want
+             if the selected option implies a lower right corner that is outside the grid, print message
+               and try again
+           if the player is a machine
+             query the smart (or random) algorithm to place the ship...
+             for example,
+             generate x in range [0, width-shipType.length]
+             generate y in range [0, height-shipType.length]
+             flip coin (generate random bool) to determine orientation
+           init a ship object
+           for otherShip in ship vector for current player
+             if ship.overlapsWish(otherShip)
+               print an error message and try again
+           push the object into the vector for the current player
+        push the ship vector for the player into the multivector that stores data for the game
+      return the ship multivector that stores boards for the whole game */
+
+
+//-----------Test Strategy------------
+//Strategy assumes automated testing; manual testing could theoretically replace it using cout statments and cin
+// inputs
+
+//TEST FOR createGrid()
+//DECLARE automated test function to test createGrid()
+//  create a mock input stream with ships that break the rules, follow the rules, but overall but the
+//  board in a known state
+//  call createGrid() with that test input stream
+//  check that the board is in the correct state
+//OR
+// By hand, enter values that cause horizontal and vertical ships to be placed at various locations.
+//  Ensure valid locations result in valid ship placement
+//  Ensure the following errors in placement result in proper errors:
+//    - Ship overlaps with ship
+//    - Ship exceeds grid space
+
+//TEST FOR ship.overlapsWith()
+//DECLARE automated test function to test ship.overlapsWith()
+// Test five cases of ships of various types that do not overlap with each other
+// Test five case of ships that overlap with each other in various ways (completely, crossing, on edge, etc..)
+
+//TEST FOR ship.existsAt()
+//DECLARE automated test function to test ship.existsAt
+// Place a ship in a grid
+// Test that all points that the ship occupies return true when existsAt is called
+// Test that a dozen points that the ship does not occupy return false when existsAt is called
+
+//TEST FOR printGrid()
+//DECLARE automated test function to test printGrid()
+// Pass a set of ships with a known location and known desired grid
+//  check that the output matches
