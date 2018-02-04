@@ -5,3 +5,5 @@ OOP Absolute C.pdf
 *.pdf
 *.synctex.gz
 .idea
+~$*
+CMakeLists.txt
