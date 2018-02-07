@@ -41,12 +41,10 @@
 //---------Dependency Imports---------
 //Include cout
 #include <iostream>
-//Include vector
-#include <vector>
-//Include rand()
-#include <random>
 //Include time()
 #include <time.h>
+//include Grid class
+#include "Grid.h"
 
 //Use the standard namespace so that we don't have to type "std" all the time
 using namespace std;
@@ -81,100 +79,28 @@ int main() {
 
     //Declare the first two grids; the first two will contain 1/3 1's and 2/3 0's
     // assigned randomly
-    vector<vector<bool> > gridOne;
-    vector<vector<bool> > gridTwo;
+    Grid gridOne(width, height);
+    Grid gridTwo(width, height);
 
-    //Declare the third grid, which will contain 1's where both gridOne and gridTwo had 1's
-    // and 0's everywhere else
-    vector<vector<bool>> gridThree;
+    //Fill grids one and two with 1/3rd ones
+    gridOne.fillOneThirdOfGridWithTrue();
+    gridTwo.fillOneThirdOfGridWithTrue();
 
+    //Use an overloaded * to combine grids one and two
+    // as described in the homework
+    Grid gridThree = gridOne * gridTwo;
 
-    //Generate two empty 2d matrices by appending zeros to
-    // arrays then appending vectors of zeros to big vectors
-    for (unsigned int i = 0; i < width; i++) {
-        vector<bool> rowOne;
-        vector<bool> rowTwo;
-        for (unsigned int j = 0; j < height; j++) {
-            rowOne.push_back(false);
-            rowTwo.push_back(false);
-        }
-        gridOne.push_back(rowOne);
-        gridTwo.push_back(rowTwo);
-    }
-
-    //Calculate the number of true values we wish to randomly insert
-    // into each grid.
-    //Since the problem specifies that 1/3rd of each grid must be 1's,
-    // we wish to insert one third of the number of elements we can insert,
-    // which is the grid size, which is the width times the height.
-    //This will function as a floor operation since it uses long/int
-    // arithmetic
-    const unsigned long desiredInsertCount = gridOne.size() * gridOne[0].size() / 3;
-
-    //While we havn't inserted enough 1 values, insert a 1 value at
-    // a random spot in the matrix. Don't insert it if it's
-    // already a 1 (that doesn't help at all)
-    unsigned int gridOneInsertCount = 0;
-    while (gridOneInsertCount < desiredInsertCount) {
-        unsigned long x = rand() % gridOne.size();
-        unsigned long y = rand() % gridOne[0].size();
-
-        //Don't insert if it's already 1
-        if (!gridOne[x][y]) {
-            gridOneInsertCount++;
-            gridOne[x][y] = true;
-        }
-    }
-
-    //Repeat the process for grid two
-    unsigned int gridTwoInsertCount = 0;
-    while (gridTwoInsertCount < desiredInsertCount) {
-        unsigned long x = rand() % gridOne.size();
-        unsigned long y = rand() % gridOne[0].size();
-
-        //Don't insert if it's already 1
-        if (!gridTwo[x][y]) {
-            gridTwoInsertCount++;
-            gridTwo[x][y] = true;
-        }
-    }
-
-    //Generate gridThree by iterating over each grid position
-    // and inserting a true in gridThree if there's a 1
-    // in both gridOne and gridTwo
-    for (unsigned int i = 0; i < width; i++) {
-        vector<bool> row;
-        for (unsigned int j = 0; j < height; j++) {
-            row.push_back(gridOne[i][j] && (gridOne[i][j] == gridTwo[i][j]));
-        }
-        gridThree.push_back(row);
-    }
-
+    //Print all three grids
     cout << "Grid 1" << endl;
-    for (unsigned int i = 0; i < gridOne.size(); i++) {
-        for (unsigned int j = 0; j < gridOne.size(); j++) {
-            cout << gridOne[i][j] << ' ';
-        }
-        cout << endl;
-    }
+    cout << gridOne;
     cout << endl;
-
     cout << "Grid 2" << endl;
-    for (unsigned int i = 0; i < gridTwo.size(); i++) {
-        for (unsigned int j = 0; j < gridTwo.size(); j++) {
-            cout << gridTwo[i][j] << ' ';
-        }
-        cout << endl;
-    }
+    cout << gridTwo;
+    cout << endl;
+    cout << "Grid 3" << endl;
+    cout << gridThree;
     cout << endl;
 
-    cout << "Grid 3" << endl;
-    for (unsigned int i = 0; i < gridThree.size(); i++) {
-        for (unsigned int j = 0; j < gridThree.size(); j++) {
-            cout << gridThree[i][j] << ' ';
-        }
-        cout << endl;
-    }
-
+    //Exit normal
     return 0;
 }
