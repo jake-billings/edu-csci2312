@@ -64,9 +64,20 @@ int main() {
     //Seed the random number generator
     srand(time(NULL));
 
-    //Store the desired grid width and height
-    const unsigned int width = 5;
-    const unsigned int height = 5;
+    //Initialize the desired grid width and height variables
+    unsigned int width;
+    unsigned int height;
+
+    //Read the width and height via cin
+    cout << "How wide should each grid be?" << endl;
+    cout << "> ";
+    cin >> width;
+    cout << "How tall should each grid be?" << endl;
+    cout << "> ";
+    cin >> height;
+
+    //Add an extra newline for aestetics
+    cout << endl;
 
     //Declare the first two grids; the first two will contain 1/3 1's and 2/3 0's
     // assigned randomly
@@ -134,7 +145,7 @@ int main() {
     for (unsigned int i = 0; i < width; i++) {
         vector<bool> row;
         for (unsigned int j = 0; j < height; j++) {
-            row.push_back(gridOne[i][j] == gridTwo[i][j]);
+            row.push_back(gridOne[i][j] && (gridOne[i][j] == gridTwo[i][j]));
         }
         gridThree.push_back(row);
     }
