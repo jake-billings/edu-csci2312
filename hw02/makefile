@@ -4,7 +4,7 @@
 #make
 #./matrix  (or whatever you call the TARGET)
 
-SOURCES = billingsJakeHW02.cpp
+SOURCES = billingsJakeHW02.cpp Grid.cpp
 
 ######Change from matrix to (for example hw1) .#######
 TARGET = billingsJakeHW02
