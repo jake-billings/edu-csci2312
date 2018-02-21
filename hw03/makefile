@@ -4,7 +4,7 @@
 #make
 #./matrix  (or whatever you call the TARGET)
 
-SOURCES = billingsJakeHW03.cpp Enums.cpp WaterVehicle.cpp
+SOURCES = billingsJakeHW03.cpp Enums.cpp WaterVehicle.cpp Grid.cpp Shot.cpp
 
 ######Change from matrix to (for example hw1) .#######
 TARGET = billingsJakeHW03
