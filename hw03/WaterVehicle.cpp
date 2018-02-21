@@ -144,3 +144,4 @@ SHIP_TYPE WaterVehicle::getShipType() const {
 
 void WaterVehicle::setShipType(SHIP_TYPE shipType) {
     WaterVehicle::shipType = shipType;
+}

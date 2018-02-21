@@ -14,7 +14,6 @@
  * @param col the col of the shot
  */
 Shot::Shot(unsigned int row, unsigned int col) : row(row), col(col) {}
-}
 
 /**
  * existsAt()
@@ -37,3 +36,4 @@ unsigned int Shot::getRow() const {
 
 unsigned int Shot::getCol() const {
     return col;
+}
