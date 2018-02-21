@@ -88,7 +88,6 @@ string WaterVehicle::getLetter() {
             return "UNKNOWN";
     }
 }
-}
 
 
 ostream &operator<<(ostream &out, WaterVehicle vehicle) {
