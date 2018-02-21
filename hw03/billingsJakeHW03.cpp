@@ -10,7 +10,7 @@
  * length of ship (in number of grid spaces)
  * starting grid location
  * horizontal or vertical orientation on grid
- *	sunk (Boolean indicating whether the ship has been sunk or not)
+ *\tsunk (Boolean indicating whether the ship has been sunk or not)
  *
  * You will also need to create a reasonable complement of member functions (constructors, accessor, and mutator functions)
  * to create the ships, to set the location of the ship, get the location of the ship, determine if the ship was hit,
@@ -18,7 +18,7 @@
  *
  * Then create a Carrier, a Battleship, a Cruiser, a Submarine, and a Destroyer which are all of type WaterVehicle and have the following lengths:
  *
- * Ship Type	Number of Grid Squares
+ * Ship Type\tNumber of Grid Squares
  * Carrier      5
  * Battleship   4
  * Cruiser      3
@@ -54,169 +54,10 @@
 #include "Enums.h"
 //Include WaterVehicle
 #include "WaterVehicle.h"
+#include "Grid.h"
 
 //Use the standard namespace so that we don't have to type "std" all the time
 using namespace std;
-
-
-//-----------Helper Function------------
-//DECLARE printGrid(ship[])
-// Parameter: ship[], which is an array of ships representing a board
-// Return value: void
-// that exist in the "grid" we are printing
-void printGrid(ostream &out, vector<WaterVehicle> grid, unsigned int width, unsigned int height) {
-    //print blank (in upper left)
-    out << "   | ";
-    //for i in [0, width)
-    for (unsigned int i = 0; i < width; i++) {
-        //print convert number to letter i+1 //label the columns
-        // such that A=1 etc
-        char a = 65 + i;
-        out << a;
-        out << " | ";
-    }
-    out << endl;
-
-
-    for (unsigned int i = 0; i < height; i++) {
-        //print j+1 // label the rows
-        out << " ";
-        out << i + 1;
-        out << " |";
-        for (unsigned int j = 0; j < width; j++) {
-            bool printedShip = false;
-            if (grid.size() > 0) {
-                for (unsigned int k = 0; k < grid.size(); k++) {
-                    //if ship.existsAt(i, j)
-                    if (grid[k].existsAt(i, j)) {
-                        // print letter for ship.SHIP_TYPE
-                        out << grid[k].getLetter();
-                        printedShip = true;
-                    }
-                }
-            }
-            if (!printedShip) {
-                out << "   ";
-            }
-            out << "|";
-        }
-        out << endl;
-    }
-}
-
-
-//DECLARE createGrid()
-// Parameters: input stream (input stream is required since we're going to mock it for testing; it would be in for a
-//  real game)
-// Return value: ship[2][5] - an array of ship arrays each ship[5] represents a fleet grid
-//  *The return value might actually be vectors because .push_back() would be useful
-//
-vector<vector<WaterVehicle>> createGrid(istream &in, ostream &out, unsigned int width, unsigned int height) {
-
-    //declare a vector of ship vectors to store all boards for the game
-    //For each player [0,1]
-    vector<vector<WaterVehicle>> grid;
-    vector<WaterVehicle> humanGrid;
-
-    //declare a ship vector for current player
-    //For each SHIP_TYPE in SHIP_TYPES (5 ship types)
-    for (unsigned int i = 0; i < SHIP_TYPE_COUNT; i++) {
-        SHIP_TYPE shipType = ALL_SHIP_TYPES[i];
-
-        //if the player is a HUMAN
-        //print board (the ship vector for current player)
-        printGrid(out, humanGrid, width, height);
-
-        //print message that says we're plaing a ship of type SHIP_TYPE
-        //print a message that says we want the upper left hand corner
-        // todo this doesn't quite work
-        out << "Where would you like to place your " << getNameForShipType(shipType) << "?" << endl;
-
-        //input := getline() from in
-        //if the input isn't in the form A1, print error message and accept input again
-        //convert the input to (x, y) coordinates where x is the number that corresponds with the letter and y is the number-1
-        //E.g. D2 -> x=3, y=1 (since we're zero indexed)
-        out << "col> ";
-        char colChar;
-        in >> colChar;
-        int col = colChar - 65; //todo vlaidate
-        out << "row> ";
-        int row;
-        in >> row;
-        row--;
-
-        //if the x, y is outside the grid, print message and try again
-        if (col > width || row > height || col < 0 || row < 0) {
-            out << "Sorry. That's outside of the grid. Please try again." << endl;
-            i--;
-        } else {
-
-            //calculate the two possible lower right corners of the ship
-            //  This are at x+length, y (horizontal) and x, y+length (vertical)
-            out << "The lower right of corner of your ship could be at ";
-            out << "(" << (col + getLengthForShipType(shipType)) << ", " << row << ") or (" << col << ", "
-                << (row + getLengthForShipType(shipType)) << ")";
-            out << endl;
-
-
-            //ask the user which option they want
-            out << "Would you like your ship to be horizontal? (Y/n)" << endl;
-            out << "> ";
-            char inputHorizontal;
-            in >> inputHorizontal;
-
-            SHIP_ORIENTATION orientation;
-            if (inputHorizontal == 'Y') {
-                orientation = SHIP_ORIENTATION::HORIZONTAL;
-            } else {
-                orientation = SHIP_ORIENTATION::VERTICAL;
-            }
-
-            //if the selected option implies a lower right corner that is outside the grid, print message
-            //and try again
-            bool placementIsInGrid =
-                    (orientation == SHIP_ORIENTATION::HORIZONTAL) ?
-                    (col + getLengthForShipType(shipType) <= width) :
-                    (row + getLengthForShipType(shipType) <= height);
-
-            //init a ship object
-            WaterVehicle ship(col, row, orientation, shipType);
-
-            bool overlapsWithAnotherShip = false;
-            //for otherShip in ship vector for current player
-            for (unsigned int k = 0; k < humanGrid.size(); k++) {
-                //if ship.overlapsWith(otherShip)
-                if (ship.overlapsWith(humanGrid[k])) {
-                    overlapsWithAnotherShip = true;
-                }
-            }
-
-            if (placementIsInGrid && !overlapsWithAnotherShip) {
-                //if valid,
-                //push the object into the vector for the current player
-                humanGrid.push_back(ship);
-            } else {
-                //if not,
-                //print an error message and try again
-                out << "Sorry, you cannot place a ship there. Please try again." << endl;
-                i--;
-            }
-        }
-    }
-
-    //push the ship vector for the player into the multivector that stores data for the game
-    grid.push_back(humanGrid);
-
-    //if the player is a machine
-    //query the smart (or random) algorithm to place the ship...
-    //for example,
-    //generate x in range [0, width-SHIP_TYPE.length]
-    //generate y in range [0, height-SHIP_TYPE.length]
-    //flip coin (generate random bool) to determine orientation
-
-    //return the ship multivector that stores boards for the whole game
-    return grid;
-}
 
 
 //---------Poor Man's Testing Suite----------
@@ -265,7 +106,7 @@ int assertString(string expected, string got) {
     if (expected == got) {
         cout << "Passed.";
     } else {
-        cout << "Failed." << endl << "Expected: \"" << expected << "\""<< endl;
+        cout << "Failed." << endl << "Expected: \"" << expected << "\"" << endl;
         cout << "Got:      \"" << got << "\"";
     }
     cout << endl;
@@ -299,8 +140,10 @@ void test() {
     stringstream outputBuf;
     stringstream desiredBuf;
 
-    vector<vector<WaterVehicle>> grid = createGrid(in, outputNull, width, height);
-    printGrid(outputBuf, grid[0], width, height);
+    Grid grid(5, 5);
+    grid.interativelyReadFrom(in, outputNull);
+
+    outputBuf << grid;
 
     desiredBuf << "   | A | B | C | D | E | \n";
     desiredBuf << " 1 | C | C | C | C | C |\n";
@@ -313,6 +156,66 @@ void test() {
     string output = outputBuf.str();
 
     failCount += assertString(desired, output);
+
+    describe("grid: should not start with isSunk flag to true on the carrier");
+    failCount += assertInt(false, grid.getShips()[0].isSunk());
+
+    describe("grid: should not set isSunk flag to true on the carrier after one shot");
+    grid.fireShot(Shot(0, 0));
+    failCount += assertInt(false, grid.getShips()[0].isSunk());
+
+    describe("grid: should appropriately respond to shots");
+    grid.fireShot(Shot(4, 4));
+    grid.fireShot(Shot(0, 4));
+    grid.fireShot(Shot(0, 3));
+    grid.fireShot(Shot(0, 2));
+    grid.fireShot(Shot(0, 1));
+
+    stringstream outputBuf2;
+    stringstream desiredBuf2;
+
+    outputBuf2 << grid;
+
+    desiredBuf2 << "   | A | B | C | D | E | \n";
+    desiredBuf2 << " 1 | X | X | X | X | X |\n";
+    desiredBuf2 << " 2 | B | B | B | B |   |\n";
+    desiredBuf2 << " 3 |   |   |   |   |Cr |\n";
+    desiredBuf2 << " 4 |   | D | D |   |Cr |\n";
+    desiredBuf2 << " 5 |Sub|Sub|Sub|   | X |\n";
+
+
+    string desired2 = desiredBuf2.str();
+    string output2 = outputBuf2.str();
+
+    failCount += assertString(desired2, output2);
+
+    describe("grid: should have set the isSunk flag to true on the carrier");
+    failCount += assertInt(true, grid.getShips()[0].isSunk());
+
+    int curLen = grid.getShots().size();
+    describe("grid: should fire fifteen random shots");
+    grid.fireFifteenRandomShots();
+    failCount += assertInt(curLen + 15, grid.getShots().size());
+
+
+    describe("WaterVehicle: should output properly while using overloaded << operator");
+    stringstream outputBuf3;
+    stringstream desiredBuf3;
+
+    for (unsigned int i = 0; i < grid.getShips().size(); i++) {
+        outputBuf3 << grid.getShips()[i] << endl;
+    }
+
+    desiredBuf3 << "carrier\t5\t(0, 0)\tsunk" << endl;
+    desiredBuf3 << "battleship\t4\t(0, 1)\tnot sunk" << endl;
+    desiredBuf3 << "cruiser\t3\t(4, 2)\tsunk" << endl;
+    desiredBuf3 << "submarine\t3\t(0, 4)\tnot sunk" << endl;
+    desiredBuf3 << "destroyer\t2\t(1, 3)\tnot sunk" << endl;
+
+    string desired3 = desiredBuf3.str();
+    string output3 = outputBuf3.str();
+
+    failCount += assertString(desired3, output3);
 
     //Completion message
     cout << endl << "Completed automated tests. Failed " << failCount << " tests." << endl;
@@ -333,8 +236,19 @@ int main() {
     const unsigned int width = 5;
     const unsigned int height = width;
 
-    vector<vector<WaterVehicle>> grid = createGrid(cin, cout, width, height);
-    printGrid(cout, grid[0], width, height);
+    Grid grid(5, 5);
+    grid.interativelyReadFrom(cin, cout);
 
+    cout << grid;
+
+    cout << "Now firing fifteen random shots...";
+    grid.fireFifteenRandomShots();
+    cout << endl;
+
+    cout << grid;
+
+    for (unsigned int i = 0; i < grid.getShips().size(); i++) {
+        cout << grid.getShips()[i] << endl;
+    }
     return 0;
 }

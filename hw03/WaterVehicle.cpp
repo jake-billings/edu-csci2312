@@ -4,6 +4,7 @@
 
 #include "Enums.h"
 #include "WaterVehicle.h"
+#include <iostream>
 
 // DECLARE ship.existsAt()
 // Parameters: i, j representing x y coordinate to check against the ship's location
@@ -99,12 +100,12 @@ void WaterVehicle::setShipOrientation(SHIP_ORIENTATION shipOrientation) {
     WaterVehicle::shipOrientation = shipOrientation;
 }
 
-bool WaterVehicle::isIsSunk() const {
-    return isSunk;
+bool WaterVehicle::isSunk() const {
+    return sunk;
 }
 
-void WaterVehicle::setIsSunk(bool isSunk) {
-    WaterVehicle::isSunk = isSunk;
+void WaterVehicle::setSunk(bool sunk) {
+    WaterVehicle::sunk = sunk;
 }
 
 SHIP_TYPE WaterVehicle::getShipType() const {
@@ -116,4 +117,15 @@ void WaterVehicle::setShipType(SHIP_TYPE shipType) {
 }
 
 WaterVehicle::WaterVehicle(unsigned int x, unsigned int y, SHIP_ORIENTATION shipOrientation, SHIP_TYPE shipType) : x(x), y(y), shipOrientation(shipOrientation), shipType(shipType),
-                                          isSunk(false) {}
+                                          sunk(false) {}
+
+ostream &operator<<(ostream &out, WaterVehicle vehicle) {
+    out << getNameForShipType(vehicle.getShipType()) << "\t";
+    out << vehicle.getLength() << "\t";
+    out << "(" << vehicle.getX() << ", " << vehicle.getY() << ")" << "\t";
+    if (!vehicle.isSunk()) {
+        out << "not ";
+    }
+    out << "sunk";;
+    return out;
+}

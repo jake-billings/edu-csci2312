@@ -67,12 +67,12 @@ private:
     SHIP_TYPE shipType;
 
     /**
-     * isSunk
+     * sunk
      *
      * a boolean representing whether or not a ship has been sunk
      *  by an enemy torpedo
      */
-    bool isSunk = false;
+    bool sunk = false;
 
 public:
     WaterVehicle(unsigned int x, unsigned int y, SHIP_ORIENTATION shipOrientation, SHIP_TYPE shipType);
@@ -98,6 +98,8 @@ public:
      */
     string getLetter();
 
+    friend ostream& operator<<(ostream &out, WaterVehicle vehicle);
+
     //Getters and Setters
     unsigned int getLength() const;
     unsigned int getX() const;
@@ -108,8 +110,8 @@ public:
     SHIP_TYPE getShipType() const;
     void setShipType(SHIP_TYPE shipType);
     void setShipOrientation(SHIP_ORIENTATION shipOrientation);
-    bool isIsSunk() const;
-    void setIsSunk(bool isSunk);
+    bool isSunk() const;
+    void setSunk(bool isSunk);
 };
 
 
