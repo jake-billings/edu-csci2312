@@ -1,6 +1,9 @@
-//
-// Created by Jake Billings on 2/3/18.
-//
+/**
+ * Name: Jake Billings
+ * Date: 02/01/2018
+ * Class: CSCI 2312
+ * Description: declaration file for WaterVehicle class
+ */
 
 #ifndef EDU_CSCI2312_WATERVEHICLE_H
 #define EDU_CSCI2312_WATERVEHICLE_H
