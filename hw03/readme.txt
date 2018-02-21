@@ -13,44 +13,73 @@
 *  Description of the program
 *******************************************************
 
-Problem
+ Problem
  =======
- Build two grids which are each X width and Y long where X and Y are
-  user inputs.
+ Create a class called WaterVehicle that has the following member variables to represent the ship as described in Assignment 1:
+ length of ship (in number of grid spaces)
+ starting grid location
+ horizontal or vertical orientation on grid
+ sunk (Boolean indicating whether the ship has been sunk or not)
 
- Randomly select 1/3 of the grid cells to be 1's and 2/3 to be 0's.
+ You will also need to create a reasonable complement of member functions (constructors, accessor, and mutator functions)
+ to create the ships, to set the location of the ship, get the location of the ship, determine if the ship was hit,
+ and determine if the ship is sunk.
 
- Compare the two to create a third grid in which 1's exist in only squares
-  where both of the original grids contained a one.
+ Then create a Carrier, a Battleship, a Cruiser, a Submarine, and a Destroyer which are all of type WaterVehicle and
+ have the following lengths:
 
- Special Things about my Solution
- ================================
-  1. I store three 2D vectors of bool objects because I saw only two states in the problem.
-     I don't use ints because it's a waste of memory.
-
+ Ship Type    Number of Grid Squares
+ Carrier      5
+ Battleship   4
+ Cruiser      3
+ Submarine    3
+ Destroyer    2
+ 
  Test Strategy
  =============
- Execute the following tests by hand:
+ E2E + Integratrion testing in test()
+  - To test this application, I enter a series of inputs from a text file. These inputs are designed to trigger
+     multiple types of invalid entries such as ship overlaps and grid excursions. At the end, I check that the
+     grid is printed correctly in the correct state.
+     
+    Then, I fire shots to sink the carrier and check that it registers as sunk.
+    
+    This runs every time the program starts.
 
-  1. Enter 2x2 grid size => grids should be 2x2
-                         => all cells in gridThree should be the AND of gridOne and gridTwo
-                         => There should be exactly 1 1 in grids 1 and 2
-  2. Enter 5x5 grid size => grids should be 5x5
-                         => all cells in gridThree should be the AND of gridOne and gridTwo
-                         => There should be exactly 8 1's in grids 1 and 2
-  3. Enter 5x3 grid size => grids should be 5x3
-                         => all cells in gridThree should be the AND of gridOne and gridTwo
-                         => There should be exactly 5 1's in grids 1 and 2
+ Status: Runs on OSX using CLion and on csegrid using g++
 
 *******************************************************
 *  Source files
 *******************************************************
 
-Name:  main.cpp
-   main() implements the entire program. It creates two grids filled wish 1/3rd 1's at
-   random locations and ANDs them to create a third grid. All three are printed
-   to console.
-   
+Name:  billingsJakeHW03.cpp
+    test() - runs automated E2E and integration testing using a few helper test functions
+    main() - runs test() then provides an interactive demo
+
+Name: Enums.h
+    declaration file containing SHIP_TYPE and SHIP_ORIENTATION enums
+
+Name: Enums.cpp
+    implementation file containing helper functions to get names and lengths from enum types
+
+Name: Grid.h
+    declaration file for the Grid class, which represents a grid of ships
+
+Name: Grid.cpp
+    implementation file containing all the functions from Grid
+
+Name: Shot.h
+    declaration file for Shot class, which represents a shot into the grid with X, Y coordinates
+
+Name: Shot.cpp
+    implementation file for Shot class, which represents a shot into the grid with X, Y coordinates
+
+Name: WaterVehicle.h
+    declaration file for WaterVehicle class, which represents a ship in the grid
+
+Name: WaterVehicle.h
+    implementation file for WaterVehicle class, which represents a ship in the grid
+
    
 *******************************************************
 *  Status of program

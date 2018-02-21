@@ -1,10 +1,28 @@
-//
-// Created by Jake Billings on 2/3/18.
-//
+/**
+ * Name: Jake Billings
+ * Date: 02/01/2018
+ * Class: CSCI 2312
+ * Description: implementation file for WaterVehicle class
+ */
 
 #include "Enums.h"
 #include "WaterVehicle.h"
 #include <iostream>
+
+/**
+ * WaterVehicle
+ *
+ * constructor
+ *
+ * creates a basic ship to insert into the grid
+ *
+ * @param x
+ * @param y
+ * @param shipOrientation
+ * @param shipType
+ */
+WaterVehicle::WaterVehicle(unsigned int x, unsigned int y, SHIP_ORIENTATION shipOrientation, SHIP_TYPE shipType)
+        : x(x), y(y), shipOrientation(shipOrientation), shipType(shipType), sunk(false) {}
 
 // DECLARE ship.existsAt()
 // Parameters: i, j representing x y coordinate to check against the ship's location
@@ -70,6 +88,19 @@ string WaterVehicle::getLetter() {
             return "UNKNOWN";
     }
 }
+}
+
+
+ostream &operator<<(ostream &out, WaterVehicle vehicle) {
+    out << getNameForShipType(vehicle.getShipType()) << "\t";
+    out << vehicle.getLength() << "\t";
+    out << "(" << vehicle.getX() << ", " << vehicle.getY() << ")" << "\t";
+    if (!vehicle.isSunk()) {
+        out << "not ";
+    }
+    out << "sunk";;
+    return out;
+}
 
 //Getters and Setters
 unsigned int WaterVehicle::getLength() const {
@@ -114,18 +145,3 @@ SHIP_TYPE WaterVehicle::getShipType() const {
 
 void WaterVehicle::setShipType(SHIP_TYPE shipType) {
     WaterVehicle::shipType = shipType;
-}
-
-WaterVehicle::WaterVehicle(unsigned int x, unsigned int y, SHIP_ORIENTATION shipOrientation, SHIP_TYPE shipType) : x(x), y(y), shipOrientation(shipOrientation), shipType(shipType),
-                                          sunk(false) {}
-
-ostream &operator<<(ostream &out, WaterVehicle vehicle) {
-    out << getNameForShipType(vehicle.getShipType()) << "\t";
-    out << vehicle.getLength() << "\t";
-    out << "(" << vehicle.getX() << ", " << vehicle.getY() << ")" << "\t";
-    if (!vehicle.isSunk()) {
-        out << "not ";
-    }
-    out << "sunk";;
-    return out;
-}

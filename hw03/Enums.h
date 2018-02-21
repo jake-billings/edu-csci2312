@@ -1,3 +1,9 @@
+/**
+ * Name: Jake Billings
+ * Date: 02/01/2018
+ * Class: CSCI 2312
+ * Description: declaration file containing enums and utility functions that convert SHIP_TYPE to length ints and name strings
+ */
 #include <string>
 
 using namespace std;

@@ -75,6 +75,18 @@ private:
     bool sunk = false;
 
 public:
+    /**
+     * WaterVehicle
+     *
+     * constructor
+     *
+     * creates a basic ship to insert into the grid
+     *
+     * @param x
+     * @param y
+     * @param shipOrientation
+     * @param shipType
+     */
     WaterVehicle(unsigned int x, unsigned int y, SHIP_ORIENTATION shipOrientation, SHIP_TYPE shipType);
 
     // DECLARE ship.existsAt()
@@ -86,9 +98,17 @@ public:
         return true if y matches j and i >= x and i< x+length
       else if ship is VERTICAL
         return true if x matches i and j >= y and j< y+length*/
-        //Getters and setters
+    //Getters and setters
     bool existsAt(unsigned int i, unsigned int j);
 
+    /**
+     * overlapsWith()
+     *
+     * returns true if this ship overlaps with other
+     *
+     * @param other another ship
+     * @return true if the two overlap
+     */
     bool overlapsWith(WaterVehicle other);
 
     /**
@@ -98,19 +118,29 @@ public:
      */
     string getLetter();
 
-    friend ostream& operator<<(ostream &out, WaterVehicle vehicle);
+    friend ostream &operator<<(ostream &out, WaterVehicle vehicle);
 
     //Getters and Setters
     unsigned int getLength() const;
+
     unsigned int getX() const;
+
     void setX(unsigned int x);
+
     unsigned int getY() const;
+
     void setY(unsigned int y);
+
     SHIP_ORIENTATION getShipOrientation() const;
+
     SHIP_TYPE getShipType() const;
+
     void setShipType(SHIP_TYPE shipType);
+
     void setShipOrientation(SHIP_ORIENTATION shipOrientation);
+
     bool isSunk() const;
+
     void setSunk(bool isSunk);
 };
 

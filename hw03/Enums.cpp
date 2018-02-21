@@ -1,3 +1,9 @@
+/**
+ * Name: Jake Billings
+ * Date: 02/01/2018
+ * Class: CSCI 2312
+ * Description: implementation file containing utility functions that convert SHIP_TYPE to length ints and name strings
+ */
 #include "Enums.h"
 
 //DECLARE length for SHIP_TYPE

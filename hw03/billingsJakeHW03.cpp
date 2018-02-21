@@ -10,29 +10,32 @@
  * length of ship (in number of grid spaces)
  * starting grid location
  * horizontal or vertical orientation on grid
- *\tsunk (Boolean indicating whether the ship has been sunk or not)
+ * sunk (Boolean indicating whether the ship has been sunk or not)
  *
  * You will also need to create a reasonable complement of member functions (constructors, accessor, and mutator functions)
  * to create the ships, to set the location of the ship, get the location of the ship, determine if the ship was hit,
  * and determine if the ship is sunk.
  *
- * Then create a Carrier, a Battleship, a Cruiser, a Submarine, and a Destroyer which are all of type WaterVehicle and have the following lengths:
+ * Then create a Carrier, a Battleship, a Cruiser, a Submarine, and a Destroyer which are all of type WaterVehicle and
+ * have the following lengths:
  *
- * Ship Type\tNumber of Grid Squares
+ * Ship Type    Number of Grid Squares
  * Carrier      5
  * Battleship   4
  * Cruiser      3
  * Submarine    3
  * Destroyer    2
  *
- *
- * Special Things about my Solution
- * ================================
- *
- *
  * Test Strategy
  * =============
+ * E2E + Integratrion testing in test()
+ *  - To test this application, I enter a series of inputs from a text file. These inputs are designed to trigger
+ *     multiple types of invalid entries such as ship overlaps and grid excursions. At the end, I check that the
+ *     grid is printed correctly in the correct state.
  *
+ *    Then, I fire shots to sink the carrier and check that it registers as sunk.
+ *
+ *    This runs every time the program starts.
  *
  * Status: Runs on OSX using CLion and on csegrid using g++
  */

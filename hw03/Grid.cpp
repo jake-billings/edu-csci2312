@@ -1,6 +1,9 @@
-//
-// Created by Jake Billings on 2/21/18.
-//
+/**
+ * Name: Jake Billings
+ * Date: 02/01/2018
+ * Class: CSCI 2312
+ * Description: implementation file for grid class
+ */
 
 #include "Grid.h"
 #include<iostream>
@@ -103,15 +106,6 @@ void Grid::interativelyReadFrom(istream &in, ostream &out) {
             }
         }
     }
-
-    //if the player is a machine
-    //query the smart (or random) algorithm to place the ship...
-    //for example,
-    //generate x in range [0, this->width-SHIP_TYPE.length]
-    //generate y in range [0, height-SHIP_TYPE.length]
-    //flip coin (generate random bool) to determine orientation
-
-    //return the ship multivector that stores boards for the whole game
 }
 
 //DECLARE printGrid(ship[])
@@ -201,16 +195,22 @@ void Grid::fireShot(Shot s) {
     }
 }
 
+/**
+ * fireFifteenRandomShots()
+ *
+ * fires fifteen random shots into the grid by appending the objects to a vector
+ */
+void Grid::fireFifteenRandomShots() {
+    for (unsigned int i = 0; i < 15; i++) {
+        this->fireShot(Shot(rand() % width, rand() % height));
+    }
+}
+
+//--getters and setters
 vector<WaterVehicle> Grid::getShips() {
     return this->ships;
 }
 
 vector<Shot> Grid::getShots() {
     return this->shots;
-}
-
-void Grid::fireFifteenRandomShots() {
-    for (unsigned int i = 0; i < 15; i++) {
-        this->fireShot(Shot(rand() % width, rand() % height));
-    }
 }
