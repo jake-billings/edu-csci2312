@@ -7,7 +7,7 @@
 SOURCES = billingsJakeHW05.cpp Animal.cpp Dog.cpp Fish.cpp Horse.cpp Lizard.cpp Monkey.cpp
 
 ######Change from matrix to (for example hw1) .#######
-TARGET = billingsJakeHW03
+TARGET = billingsJakeHW05
 
 #-------Do Not Change below this line-------------
 #Compile with g++
