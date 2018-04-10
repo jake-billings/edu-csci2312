@@ -57,9 +57,9 @@ ostream &operator<<(ostream &out, Grid grid) {
                     }
 
                     if (wasHit) {
-                        out << " X ";
-                    } else {
                         out << " O ";
+                    } else {
+                        out << " X ";
                     }
 
                     printedShip = true;
@@ -124,9 +124,9 @@ void Grid::printForOpponent(ostream &out) {
                     }
 
                     if (wasHit) {
-                        out << " X ";
-                    } else {
                         out << " O ";
+                    } else {
+                        out << " X ";
                     }
 
                     printedShip = true;
