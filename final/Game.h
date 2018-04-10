@@ -8,6 +8,9 @@
 //Include Player since we use two players
 #include "Player.h"
 
+//Include stdexcept vecause we throw errors sometimes
+#include <stdexcept>
+
 #ifndef EDU_CSCI2312_GAME_H
 #define EDU_CSCI2312_GAME_H
 
