@@ -8,11 +8,16 @@
 #ifndef EDU_CSCI2312_GRID_H
 #define EDU_CSCI2312_GRID_H
 
+//Include iostream because we have stream operators to define
 #include <iostream>
+//Include vector because this data structure is a 2D vector
 #include <vector>
+//Include stdexcept because we throw errors sometimes
+#include <stdexcept>
+//Include WaterVehicle since the grid contains ships
 #include "WaterVehicle.h"
+//Include Shot since the grid contains shots
 #include "Shot.h"
-#include<iostream>
 
 /**
  * Grid
