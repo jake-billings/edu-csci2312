@@ -189,6 +189,10 @@ Name: Design Document.docx
     microsoft word
     additional documentation regarding class types and project architecture
 
+Name: Design.ai
+    adobe illustrator
+    contains a diagram of the classes in this project
+
    
 *******************************************************
 *  Status of program
