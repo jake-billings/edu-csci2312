@@ -4,7 +4,62 @@
  * Class: CSCI 2312
  * Description:
  *
+ * ==============
+ * = Battleship =
+ * ==============
  *
+ * Problem
+ * =======
+ * "For many of us old school gamers, we started out playing good old fashioned board games.  Many of us learned strategy
+ * from games like Risk and Battleship.  For your project, you will be developing a simple battleship type game to test
+ * your knowledge of the concepts we have learned in Object Oriented Programming.
+ *
+ * The purpose of this project is to have you design of a fairly complicated project using concepts we have learned and
+ * then implement the solution using some of the code that we wrote in the previous projects along with new code, and
+ * then test your game." - CSCI 2312 Final Project.docx
+ *
+ * See "CSCI 2312 Final Project.docx" for complete problem statement and requirement set.
+ *
+ * Create a Carrier, a Battleship, a Cruiser, a Submarine, and a Destroyer which are all of type WaterVehicle and
+ * have the following lengths:
+ *
+ * Ship Type    Number of Grid Squares
+ * Carrier      5
+ * Battleship   4
+ * Cruiser      3
+ * Submarine    3
+ * Destroyer    2
+ *
+ *
+ * Overview
+ * ========
+ * The Game class contains two players. The Player class has references to both its own grid and to the other player's
+ *  grid. The grids are represented as sparse arrays using the vector data structure. Player is an abstract class.
+ *  There exists both a Computer and a Human implementation of the class. Game handles turn and winning logic. Thus,
+ *  it is trivial to pit two CPUs against each other or to pit two players against each other.
+ *
+ *  See Design Document.docx for additional engineering design documentation.
+ *  See HW03 for early progress towards this final project (final code is all in this folder)
+ *  See HW04 for early design for this final project (final documentation is all in this folder (final))
+ *
+ *
+ * Extra Credit
+ * ============
+ * I implemented the portion of the extra credit piece that requires an entire ship to be hit in order to be considered
+ *  sunk. When a shot is fired into the grid, the grid checks if it sunk any ships. If it does, it marks said ship as
+ *  sunk. Thus, the logic is found primarily in Grid::fireShot(). The boolean is then read by other logic to determine
+ *  if the ship has been sunk. For instance, the Player::hasLost() method checks all of the ships in the player's grid.
+ *
+ *
+ * Test Strategy
+ * =============
+ * Integratrion testing in test()
+ *  - To test this application, I created a series of unit/intergration tests in test()
+ *    calls to describe() state what each test does
+ *    multiple mock input csv files are used to validate inputs from the csv file
+ *
+ *
+ * Status: Runs on OSX using CLion and on csegrid using g++
  */
 
 //---------Dependency Imports---------
