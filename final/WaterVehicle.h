@@ -14,6 +14,8 @@
 #include "Enums.h"
 //Include iostream for >> and << operator declarations
 #include <iostream>
+//Include stdexcept because we throw errors sometimes
+#include <stdexcept>
 
 //Use the standard namespace
 using namespace std;
