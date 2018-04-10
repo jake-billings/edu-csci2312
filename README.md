@@ -4,6 +4,12 @@ This repository contains the work I completed for the course CSCI2312 Object Ori
 ## Building this Project
 This project has no non-standard library dependencies. I wrote a majority of this code using CMake in CLion. However, homework requirements dictate that each assignment must have a working makefile from a standard template distributed at the beginning of the class. Thus, each folder contains a make file. If you have `g++` installed, all you have to do is clone the repository and run make in a directory to build the project. The executable will be place in that directory. I do not include `CMakeLists.txt`.
 
+## Final Project
+The most important folder/assignment is the final project. All of the other assignments build towards this project. It is a complete implementation of a human v. CPU game of battleship.
+![class diagram](final/imgs/classes.png)
+![flow chart of process](final/imgs/flow.png)
+
+
 ## Documentation
 I put a lot of effort into documenting the code in this repository. All functions, variables, blocks, includes, and classes have documentation-style comments detailing the name, type, purpose, and details of the following code.
 ```C++
