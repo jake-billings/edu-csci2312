@@ -422,13 +422,27 @@ int main() {
 
     //While nobody has lost, continue playing
     // somebody will win eventually
-    while (!game.hasLoser()) {
-        game.executeRound();
+    // if a runtime_error is thrown, it means the user has quit
+    // so, we dump the grids to the console and quit
+    try {
+        while (!game.hasLoser()) {
+            game.executeRound();
+        }
+
+        //Print which player won
+        cout << "The winner is: ";
+        game.getWinner()->print(cout);
+    } catch (runtime_error e) {
+        cout << "The user has opted to quit. Here's the grid state:" << endl;
+
+        cout << "====================Your grid====================" << endl;
+        cout << *game.getA()->getGrid() << endl;
+        cout << "=================================================" << endl;
+        cout << "===============Your Opponent's Grid===============" << endl;
+        cout << *game.getB()->getGrid() << endl;
+        cout << "==================================================" << endl;
     }
 
-    //Print which player won
-    cout << "The winner is: ";
-    game.getWinner()->print(cout);
 
     //Return 0 since we successfully made it to the end of a game
     return 0;

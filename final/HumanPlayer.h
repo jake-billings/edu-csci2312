@@ -7,10 +7,10 @@
 
 //Include io stream since we work with input and output streams
 #include <iostream>
-
 //Include file streams so that we can read from the csv file to populate ships
 #include <fstream>
-
+//Include stdexcept since we throw exceptions sometimes
+#include <stdexcept>
 //Include Player.h so that we can extend it
 #include "Player.h"
 

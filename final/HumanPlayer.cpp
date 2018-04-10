@@ -66,6 +66,19 @@ void HumanPlayer::fireShot() {
     *this->out << "===============Your Opponent's Grid===============" << endl;
     this->getOpposingGrid()->printForOpponent(*this->out);
     *this->out << "==================================================" << endl;
+
+    //Give the opportunity to quit
+    *this-> out << "Would you like to quit or continue? (Enter 'q' to quit; enter 'y' to continue)" << endl;
+    *this->out << "inp> ";
+    char inp;
+    *this->in >> inp;
+
+    //If the user chose to quit, throw an exception
+    if (inp == 'q') {
+        throw runtime_error("user has opted to quit");
+    }
+
+    //Ask for coordinates to shoot at
     *this->out << "Please enter coordinates on your opponent's grid to fire a shot." << endl;
 
     //While the shot isn't valid, recollect its

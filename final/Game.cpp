@@ -92,6 +92,7 @@ void Game::executeRound() {
 const Player *Game::getA() const {
     return a;
 }
+
 const Player *Game::getB() const {
     return b;
 }
