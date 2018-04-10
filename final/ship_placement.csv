@@ -1,0 +1,6 @@
+TypeOfShip,Location,HorizOrVer
+Carrier,A1,H
+Battleship,B5,H
+Cruiser,C2,H
+Submarine,G6,V
+Destroyer,H6,V
