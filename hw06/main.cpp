@@ -98,58 +98,58 @@ void test() {
     //-----Test LinkedList-----
 
     //push_front
-    describe("push_front: should successfully store char at pos zero with length 0");
+    describe("LinkedList: push_front: should successfully store char at pos zero with length 0");
     LinkedList<char> v;
     v.push_front('f');
     failCount += assertInt('f', v.first());
-    describe("push_front: should successfully store char at pos zero with length 1");
+    describe("LinkedList: push_front: should successfully store char at pos zero with length 1");
     v.push_front('d');
     failCount += assertInt('d', v.first());
-    describe("push_front: should successfully store char at pos zero with length 2");
+    describe("LinkedList: push_front: should successfully store char at pos zero with length 2");
     v.push_front('s');
     failCount += assertInt('s', v.first());
-    describe("push_front: should successfully store char at pos zero with length 3");
+    describe("LinkedList: push_front: should successfully store char at pos zero with length 3");
     v.push_front('a');
     failCount += assertInt('a', v.first());
-    describe("push_front: list should contain \"asdf\"");
+    describe("LinkedList: push_front: list should contain \"asdf\"");
     string line;
     ostringstream os(line);
     os << v;
     failCount += assertString("asdf", os.str());
 
     //push_back
-    describe("push_back: should successfully store char at back of linked list");
+    describe("LinkedList: push_back: should successfully store char at back of linked list");
     v.push_back('t');
     failCount += assertInt(v.last(), 't');
-    describe("push_back: list should now contain \"asdft\"");
+    describe("LinkedList: push_back: list should now contain \"asdft\"");
     line.clear();
     os = ostringstream(line);
     os << v;
     failCount += assertString("asdft", os.str());
-    describe("push_back: should successfully store char at back of linked list");
+    describe("LinkedList: push_back: should successfully store char at back of linked list");
     v.push_back('y');
     failCount += assertInt(v.last(), 'y');
-    describe("push_back: list should now contain \"asdfty\"");
+    describe("LinkedList: push_back: list should now contain \"asdfty\"");
     line.clear();
     os = ostringstream(line);
     os << v;
     failCount += assertString("asdfty", os.str());
 
     //pop_back
-    describe("pop_back: should successfully delete char at back of linked list");
+    describe("LinkedList: pop_back: should successfully delete char at back of linked list");
     v.pop_back();
     failCount += assertInt('t', v.last());
-    describe("pop_back: list should now contain \"asdft\"");
+    describe("LinkedList: pop_back: list should now contain \"asdft\"");
     line.clear();
     os = ostringstream(line);
     os << v;
     failCount += assertString("asdft", os.str());
 
     //pop_front
-    describe("pop_front: should successfully delete char at front of linked list");
+    describe("LinkedList: pop_front: should successfully delete char at front of linked list");
     v.pop_front();
     failCount += assertInt('s', v.first());
-    describe("pop_front: list should now contain \"sdft\"");
+    describe("LinkedList: pop_front: list should now contain \"sdft\"");
     line.clear();
     os = ostringstream(line);
     os << v;
@@ -157,7 +157,7 @@ void test() {
 
     //test for small arrays
     LinkedList<char> a;
-    describe("pop_back: should throw error if the list is empty");
+    describe("LinkedList: pop_back: should throw error if the list is empty");
     bool err = false;
     try {
         a.pop_back();
@@ -166,7 +166,7 @@ void test() {
     }
     failCount += assertInt(true, err);
 
-    describe("pop_back: should not throw error if the list is one item");
+    describe("LinkedList: pop_back: should not throw error if the list is one item");
     a.push_front('a');
     err = false;
     try {
@@ -176,10 +176,10 @@ void test() {
     }
     failCount += assertInt(false, err);
 
-    describe("pop_back: should be empty after removing last item");
+    describe("LinkedList: pop_back: should be empty after removing last item");
     failCount += assertInt(true, a.isEmpty());
 
-    describe("pop_back: should throw an error if the list has been emptied");
+    describe("LinkedList: pop_back: should throw an error if the list has been emptied");
     err = false;
     try {
         a.pop_back();
@@ -189,7 +189,7 @@ void test() {
     failCount += assertInt(true, err);
 
     LinkedList<char> c;
-    describe("pop_front: should throw an error if the list is empty");
+    describe("LinkedList: pop_front: should throw an error if the list is empty");
     err = false;
     try {
         c.pop_front();
@@ -198,7 +198,7 @@ void test() {
     }
     failCount += assertInt(true, err);
 
-    describe("pop_front: should not throw an error if there is an item in the list");
+    describe("LinkedList: pop_front: should not throw an error if there is an item in the list");
     c.push_front('a');
     err = false;
     try {
@@ -208,7 +208,7 @@ void test() {
     }
     failCount += assertInt(false, err);
 
-    describe("pop_front: should throw an error if the list has been emptied");
+    describe("LinkedList: pop_front: should throw an error if the list has been emptied");
     err = false;
     try {
         c.pop_front();
@@ -216,6 +216,77 @@ void test() {
         err = true;
     }
     failCount += assertInt(true, err);
+
+    describe("LinkedList: clear: should make a full LinkedList empty");
+    LinkedList<char> d;
+    d.push_front('a');
+    d.push_front('b');
+    d.push_front('c');
+    d.push_front('d');
+    d.push_front('e');
+    d.clear();
+    failCount += assertInt(true, d.isEmpty());
+
+    describe("LinkedList: clear: should still be emtpy if called on an empty LinkedList");
+    d.clear();
+    failCount += assertInt(true, d.isEmpty());
+
+    describe("LinkedList: clear: should still be able to add elements after");
+    d.push_front('z');
+    failCount += assertInt('z', d.first());
+
+    describe("LinkedList: operator=: should assign one list to another");
+    LinkedList<char> e;
+    e.push_front('f');
+    e.push_front('g');
+    e.push_front('i');
+    LinkedList<char> f;
+    f.push_front('h');
+    f.push_front('k');
+    f.push_front('j');
+    f.push_front('z');
+    f.push_front('y');
+    e = f;
+    failCount += assertInt('y', e.first());
+
+    describe("LinkedList: operator=: lefthand element should still be able to receive elements");
+    e.push_front('q');
+    failCount += assertInt('q', e.first());
+
+    describe("LinkedList: operator=: lefthand element should still be able to clear()");
+    e.clear();
+    failCount += assertInt(true, e.isEmpty());
+
+    describe("LinkedList: operator=: righthand element should still be able to receive elements");
+    f.push_front('r');
+    failCount += assertInt('r', f.first());
+
+    describe("LinkedList: operator=: righthand element should still be able to clear()");
+    f.clear();
+    failCount += assertInt(true, f.isEmpty());
+
+    describe("LinkedList: operator>>: should output elements in sequence");
+    LinkedList<char> jake;
+    jake.push_front('k');
+    jake.push_front('a');
+    jake.push_front('j');
+    jake.push_back('e');
+    line.clear();
+    os = ostringstream(line);
+    os << jake;
+    failCount += assertString("jake", os.str());
+
+    describe("LinkedList: printList(): should output elements in sequence");
+    LinkedList<char> jake2;
+    jake2.push_front('k');
+    jake2.push_front('a');
+    jake2.push_front('j');
+    jake2.push_back('e');
+    line.clear();
+    os = ostringstream(line);
+    jake2.printList(os);
+    failCount += assertString("jake", os.str());
+
 
     //-----Test Student Struct/IO-----
     describe("student: operator>>: should successfully read first student from students.dat");

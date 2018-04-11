@@ -87,16 +87,10 @@ public:
      * O(n)
      *
      * deallocates all memory used on the heap by this linked list
-     *  by iterating each element
+     *  by iterating each element (does this by calling clear())
      */
     ~LinkedList() {
-        Node<T> *cur = this->head;
-        Node<T> *next = nullptr;
-        while (cur != nullptr) {
-            next = cur->getNext();
-            delete cur;
-            cur = next;
-        }
+        this->clear();
     }
 
     /**
@@ -126,6 +120,44 @@ public:
             this->push_back(cur->getData());
             cur = cur->getNext();
         }
+    }
+
+
+    /**
+     * operator=
+     *
+     * @param other
+     */
+    LinkedList<T> operator= (const LinkedList<T> &other) {
+        this->clear();
+
+        //Loop over each element of the old list and copy it
+        Node<T> *cur = other.head;
+        while (cur != nullptr) {
+            this->push_back(cur->getData());
+            cur = cur->getNext();
+        }
+
+        return *this;
+    }
+
+    /**
+     * clear()
+     *
+     * method
+     *
+     * deallocates all memory used on the heap by this linked list
+     *  by iterating each element
+     */
+    void clear() {
+        Node<T> *cur = this->head;
+        Node<T> *next = nullptr;
+        while (cur != nullptr) {
+            next = cur->getNext();
+            delete cur;
+            cur = next;
+        }
+        this->head = nullptr;
     }
 
     /**
@@ -319,6 +351,19 @@ public:
      */
     bool isEmpty() {
         return this->head == nullptr;
+    }
+
+    /**
+     * printList()
+     *
+     * method
+     *
+     * this function is implemented to meet the requirements of the homework project document
+     *
+     * @param out the output stream to write to (like cout)
+     */
+    void printList(std::ostream &out) {
+        out << *this;
     }
 
     /**
