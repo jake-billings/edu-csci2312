@@ -21,7 +21,7 @@
 #include <sstream>
 
 //Include the assignment headers
-#include "LinkedList.h"
+#include "LinkedList.hpp"
 
 //Use the standard namespace so that we don't have to type "std" all the time
 using namespace std;
