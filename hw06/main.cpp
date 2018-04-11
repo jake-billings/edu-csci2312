@@ -19,8 +19,11 @@
 #include <iostream>
 //Include sstream for testing the output of the << operator
 #include <sstream>
+//Include fstream for reading binary data from students.dat
+#include <fstream>
 
 //Include the assignment headers
+#include "Student.h"
 #include "LinkedList.hpp"
 
 //Use the standard namespace so that we don't have to type "std" all the time
@@ -91,6 +94,8 @@ void test() {
 
     //Keep track of how many tests we fail
     unsigned int failCount = 0;
+
+    //-----Test LinkedList-----
 
     //push_front
     describe("push_front: should successfully store char at pos zero with length 0");
@@ -212,6 +217,33 @@ void test() {
     }
     failCount += assertInt(true, err);
 
+    //-----Test Student Struct/IO-----
+    describe("student: operator>>: should successfully read first student from students.dat");
+    err = false;
+    Student s;
+    ifstream in;
+    try {
+        in.open("students.dat", ios::in | ios::binary);
+        in >> s;
+    } catch (exception e) {
+        cerr << e.what();
+        err = true;
+    }
+    failCount += assertInt(false, err);
+
+    describe("student: operator>>: should read the first student's name as 'Ashly'");
+    failCount += assertString("Ashly", s.name);
+    describe("student: operator>>: should read the first student's id as 111");
+    failCount += assertInt(111, s.id);
+
+    describe("student: operator>>: should read two more students from the file");
+    unsigned int count = 0;
+    while (in>>s) {
+        count++;
+    }
+    failCount += assertInt(2, count);
+
+    in.close();
 
     //Completion message
     cout << endl << "Completed automated tests. Failed " << failCount << " tests." << endl;
@@ -234,6 +266,20 @@ int main() {
 
     //Print welcome message
     cout << "===========Demo===========" << endl;
+
+    LinkedList<Student> students;
+
+    ifstream in;
+    in.open("students.dat", ios::in | ios::binary);
+    Student s;
+    while (in>>s) {
+        students.push_back(s);
+    }
+
+    while (!students.isEmpty()) {
+        cout << students.first() << endl;
+        students.pop_front();
+    }
 
     cout << "=========End Demo=========" << endl;
 
