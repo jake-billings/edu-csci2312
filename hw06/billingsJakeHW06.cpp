@@ -129,16 +129,14 @@ void test() {
     v.push_back('t');
     failCount += assertInt(v.last(), 't');
     describe("LinkedList: push_back: list should now contain \"asdft\"");
-    line.clear();
-    os = ostringstream(line);
+    os.str("");
     os << v;
     failCount += assertString("asdft", os.str());
     describe("LinkedList: push_back: should successfully store char at back of linked list");
     v.push_back('y');
     failCount += assertInt(v.last(), 'y');
     describe("LinkedList: push_back: list should now contain \"asdfty\"");
-    line.clear();
-    os = ostringstream(line);
+    os.str("");
     os << v;
     failCount += assertString("asdfty", os.str());
 
@@ -148,7 +146,7 @@ void test() {
     failCount += assertInt('t', v.last());
     describe("LinkedList: pop_back: list should now contain \"asdft\"");
     line.clear();
-    os = ostringstream(line);
+    os.str("");
     os << v;
     failCount += assertString("asdft", os.str());
 
@@ -158,7 +156,7 @@ void test() {
     failCount += assertInt('s', v.first());
     describe("LinkedList: pop_front: list should now contain \"sdft\"");
     line.clear();
-    os = ostringstream(line);
+    os.str("");
     os << v;
     failCount += assertString("sdft", os.str());
 
@@ -279,7 +277,7 @@ void test() {
     jake.push_front('j');
     jake.push_back('e');
     line.clear();
-    os = ostringstream(line);
+    os.str("");
     os << jake;
     failCount += assertString("jake", os.str());
 
@@ -290,7 +288,7 @@ void test() {
     jake2.push_front('j');
     jake2.push_back('e');
     line.clear();
-    os = ostringstream(line);
+    os.str("");
     jake2.printList(os);
     failCount += assertString("jake", os.str());
 
