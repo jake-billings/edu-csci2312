@@ -4,6 +4,13 @@
  * Class: CSCI 2421
  *
  * Task:
+ *  "For this assignment, you will use pointers with dynamic memory, templates, binary files and exception handling to
+ *  build a multi-purpose, generic, Single Linked List. Anytime you are using dynamic memory, you should have a Copy
+ *  Constructor, overloaded Assignment Operator, and a Destructor. Though this will be similar in functionality to the
+ *  C++ Standard Template Library (STL) forward_list, you will create your own using pointers (instead of forward_list,
+ *  list or vector)." - Assignment Docx
+ *
+ *  Implement a generic (templated LinkedList) as well as binary file IO for a student struct
  *
  * Outline
  * =======
