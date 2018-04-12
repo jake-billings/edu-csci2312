@@ -309,7 +309,7 @@ void test() {
 
     describe("student: operator>>: should read two more students from the file");
     unsigned int count = 0;
-    while (in>>s) {
+    while (in >> s) {
         count++;
     }
     failCount += assertInt(2, count);
@@ -338,21 +338,81 @@ int main() {
     //Print welcome message
     cout << "===========Demo===========" << endl;
 
-    LinkedList<Student> students;
+    //---Exact Tests from Document---
+    //Create a pointer to a list and assign it to a new pointer
+    LinkedList<int> *a = new LinkedList<int>;
 
+    //Demonstrate all functions with multiple ints and use cout statements and the printList to
+    // describe each of the functions.
+    cout << "Empty LinkedList: " << *a << endl;
+
+    a->push_front(2);
+    a->push_front(3);
+
+    cout << "Two element LinkedList: " << *a << endl;
+
+    a->push_back(4);
+    a->push_back(5);
+
+    cout << "Four element LinkedList: " << *a << endl;
+
+    a->pop_back();
+
+    cout << "pop_back(): " << *a << endl;
+
+    a->pop_front();
+
+    cout << "pop_front(): " << *a << endl;
+
+    //Create a pointer to a second list and construct it with the first list
+    LinkedList<int> b(*a);
+
+    //Print out the second list to show that your copy constructor worked.
+    cout << "copied List: " << b << endl;
+
+    //Create a pointer to a third list, then use = to assign it to the first list
+    LinkedList<int> *c = new LinkedList<int>;
+    *c = *a; // use * to use the overloaded operator instead of pointer assignment
+
+    //Print out the third list to show that your assignment operator worked.
+    cout << "assigned list: " << *c << endl;
+
+    //Demonstrate exception handling of pop_front.
+    try {
+        while (true) {
+            a->pop_front();
+        }
+    } catch (runtime_error e) {
+        cout << "you can't remove elements forever without getting an exception" << endl;
+    }
+
+    //Delete both pointers
+    delete a;
+    delete c;
+
+    //Declare a list of type Students
+    LinkedList<Student> *students = new LinkedList<Student>;
+
+    //Read in Students from provided binary file students.dat.
     ifstream in;
     in.open("students.dat", ios::in | ios::binary);
     Student s;
-    while (in>>s) {
-        students.push_back(s);
+
+    //Use push_front to create a linked list of students. Note: if you don’t get 3 records read in from students.dat,
+    // you could try writing some binary students before reading them in…then comment that out once you get the students.dat to read in properly.
+    while (in >> s) {
+        students->push_back(s);
     }
 
-    while (!students.isEmpty()) {
-        cout << students.first() << endl;
-        students.pop_front();
+    //Print students list to show it worked
+    while (!students->isEmpty()) {
+        cout << students->first() << endl;
+        students->pop_front();
     }
 
     cout << "=========End Demo=========" << endl;
+
+    delete students;
 
     //Exit with a 0 status code
     return 0;
