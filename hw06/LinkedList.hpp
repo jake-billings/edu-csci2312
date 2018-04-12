@@ -51,7 +51,8 @@
  *
  * @tparam T the type of class that this LinkedList will hold (e.g. char, Student)
  */
-template<class T> class LinkedList {
+template<typename T>
+class LinkedList {
 private:
     /**
      * head
@@ -128,7 +129,9 @@ public:
      *
      * @param other
      */
-    LinkedList<T> operator= (const LinkedList<T> &other) {
+    LinkedList<T> operator=(const LinkedList<T> &other) {
+        if (this == nullptr) throw runtime_error("cannot assign a linkedlist if it's nullptr; instantiate it first");
+
         this->clear();
 
         //Loop over each element of the old list and copy it

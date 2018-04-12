@@ -24,7 +24,7 @@
  *
  * @tparam T the type of class that this node will hold
  */
-template<class T>
+template<typename T>
 class Node {
 private:
     /**
