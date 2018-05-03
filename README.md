@@ -71,14 +71,12 @@ failCount += assertInt(SHIP_ORIENTATION::HORIZONTAL, v.getShipOrientation());
 ```
 
 ## Assignments
-- HW1: Test of Canvas submission and ROCKET design methodology
-- HW2: Grid implemented as a two-dimensional C++ vector 
-- HW3: Partial implementation of final project/C++ grids
-- HW4: Design research/documentation in preparation for final project
-- HW5: Inheritance/Polymorphism with exception handling + IO
-- HW7
-- HW8
-- HW9
+- HW01: Test of Canvas submission and ROCKET design methodology
+- HW02: Grid implemented as a two-dimensional C++ vector 
+- HW03: Partial implementation of final project/C++ grids
+- HW04: Design research/documentation in preparation for final project
+- HW05: Inheritance/Polymorphism with exception handling + IO
+- HW06: Templated LinkedList implementation
 - FINAL PROJECT: Full implementation of the game Battleship with human vs. artificial intelligence
 
 
