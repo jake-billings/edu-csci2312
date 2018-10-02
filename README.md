@@ -1,4 +1,7 @@
 # edu-csci2312
+
+[![DOI](https://zenodo.org/badge/117867131.svg)](https://zenodo.org/badge/latestdoi/117867131)
+
 This repository contains the work I completed for the course CSCI2312 Object Oriented Programming at the University of Colorado Denver. I completed this course concurrently with [CSCI2421 Data Structures and Program Design](https://github.com/jake-billings/edu-csci2421).
 
 ## Building this Project
