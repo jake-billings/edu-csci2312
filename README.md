@@ -81,4 +81,4 @@ failCount += assertInt(SHIP_ORIENTATION::HORIZONTAL, v.getShipOrientation());
 
 
 ### Other Projects ###
-Checkout my other projects at [http://www.jakebillings.com](http://www.jakebillings.com) or contact me via [LinkedIn](https://www.linkedin.com/in/jake-billings/).
+Checkout my other projects at [https://jakebillings.com](http://www.jakebillings.com) or contact me via [LinkedIn](https://www.linkedin.com/in/jake-billings/).
